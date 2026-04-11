@@ -3,12 +3,12 @@
   "bot-account": {
     "username": "RAJDEEP 24/7",
     "password": "",
-    "type": "offline"
+    "type": "online"
   },
   "server": {
     "ip": "ARCANESMPS-1.aternos.me",
     "port": 50402,
-    "version": "1.21.1",
+    "version": "1.21.11",
     "try-creative": false
   },
   "position": {
