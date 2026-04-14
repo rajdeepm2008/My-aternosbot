@@ -1,9 +1,9 @@
 {
   "name": "AFK Bot",
   "bot-account": {
-    "username": "RAJDEEP 24/7",
+    "username": "RAJDEEP_24_7",
     "password": "",
-    "type": "online"
+    "type": "offline"
   },
   "server": {
     "ip": "ARCANESMPS-1.aternos.me",
@@ -13,9 +13,9 @@
   },
   "position": {
     "enabled": true,
-    "x": 0,
-    "y": 100,
-    "z": 0
+    "x": 1319,
+    "y": 70,
+    "z": 1410
   },
   "utils": {
     "auto-auth": {
@@ -29,7 +29,7 @@
     "chat-messages": {
       "enabled": true,
       "repeat": true,
-      "repeat-delay": 120,
+      "repeat-delay": 40,
       "messages": [
         "I'm a regular player",
         "FOLLOW ME ON INSTAGRAM ncs.rajdeep!",
