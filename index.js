@@ -1061,16 +1061,21 @@ app.post("/command", express.json(), (req, res) => {
 //                    END OF WEB TOOLS
 //============================================================
 
-// FIX: handle port conflict gracefully - try next port if taken
+// Start HTTP server on PORT, fall back to PORT+1 once if needed
+let serverStarted = false;
 const server = app.listen(PORT, "0.0.0.0", () => {
+  serverStarted = true;
   addLog(`[Server] HTTP server started on port ${server.address().port} `);
 });
 server.on("error", (err) => {
-  if (err.code === "EADDRINUSE") {
+  if (err.code === "EADDRINUSE" && !serverStarted) {
+    serverStarted = true;
     const fallbackPort = PORT + 1;
     addLog(`[Server] Port ${PORT} in use - trying port ${fallbackPort} `);
-    server.listen(fallbackPort, "0.0.0.0");
-  } else {
+    app.listen(fallbackPort, "0.0.0.0", () => {
+      addLog(`[Server] HTTP server started on port ${fallbackPort} `);
+    });
+  } else if (!serverStarted) {
     addLog(`[Server] HTTP server error: ${err.message} `);
   }
 });
@@ -1224,6 +1229,22 @@ function createBot() {
     });
 
     bot.loadPlugin(pathfinder);
+
+    // Handle resource pack requests during configuration phase
+    // The server blocks joining until the client responds to the resource pack
+    bot._client.on("add_resource_pack", (data) => {
+      const packUuid = data.uuid;
+      addLog(`[ResourcePack] Server sent resource pack request, accepting...`);
+      // Tell server we accepted (starting download)
+      bot._client.write("resource_pack_receive", { uuid: packUuid, result: 3 });
+      // After a short delay, tell server it loaded successfully
+      setTimeout(() => {
+        try {
+          bot._client.write("resource_pack_receive", { uuid: packUuid, result: 0 });
+          addLog(`[ResourcePack] Resource pack reported as loaded`);
+        } catch (e) { /* bot may have disconnected */ }
+      }, 2000);
+    });
 
     // FIX: connection timeout - end the old bot before reconnecting to avoid ghost bots
     clearBotTimeouts();
