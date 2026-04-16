@@ -1,7 +1,7 @@
 {
   "name": "AFK Bot",
   "bot-account": {
-    "username": "RAJDEEP_24_7",
+    "username": "CoderHuLaadle",
     "password": "",
     "type": "offline"
   },
@@ -13,9 +13,9 @@
   },
   "position": {
     "enabled": true,
-    "x": 1319,
+    "x": 1305,
     "y": 70,
-    "z": 1410
+    "z": 1405
   },
   "utils": {
     "auto-auth": {
@@ -29,11 +29,9 @@
     "chat-messages": {
       "enabled": true,
       "repeat": true,
-      "repeat-delay": 40,
+      "repeat-delay": 20,
       "messages": [
-        "I'm a regular player",
-        "FOLLOW ME ON INSTAGRAM ncs.rajdeep!",
-        "I like to play Minecraft!"
+        "/tellraw @a {\"text\":\"FOLLOW ME BY CLICKING HERE\",\"color\":\"green\",\"clickEvent\":{\"action\":\"open_url\",\"value\":\"https://www.instagram.com/ncs.rajdeep\"}}"
       ]
     },
     "chat-log": true,
@@ -45,32 +43,32 @@
     "enabled": true,
     "circle-walk": {
       "enabled": true,
-      "radius": 4,
-      "speed": 3000
+      "radius": 40,
+      "speed": 30000
     },
     "look-around": {
       "enabled": true,
-      "interval": 5000
+      "interval": 10
     },
     "random-jump": {
       "enabled": true,
-      "interval": 10000
+      "interval": 10
     }
   },
   "modules": {
     "avoidMobs": true,
-    "combat": true,
-    "beds": false,
+    "combat": false,
+    "beds": true,
     "chat": true,
     "console-commands": true
   },
   "combat": {
-    "attack-mobs": true,
+    "attack-mobs": false,
     "auto-eat": true
   },
   "beds": {
-    "pick-up-day": false,
-    "place-night": false
+    "pick-up-day": true,
+    "place-night": true
   },
   "discord": {
     "enabled": false,
